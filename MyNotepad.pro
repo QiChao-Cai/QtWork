@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,20 +14,31 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     replacedialog.cpp \
-    searchdialog.cpp
+    searchdialog.cpp \
+    DatabaseSingleton.cpp \
+    TextHighlight.cpp \
+    CollectManagerDialog.cpp \
+    BookmarkManagerDialog.cpp
 
 HEADERS += \
     aboutdialog.h \
     codeeditor.h \
     mainwindow.h \
     replacedialog.h \
-    searchdialog.h
+    searchdialog.h \
+    DatabaseSingleton.h \
+    DataStructure.h \
+    TextHighlight.h \
+    CollectManagerDialog.h \
+    BookmarkManagerDialog.h
 
 FORMS += \
     aboutdialog.ui \
     mainwindow.ui \
     replacedialog.ui \
-    searchdialog.ui
+    searchdialog.ui \
+    CollectManagerDialog.ui \
+    BookmarkManagerDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -35,38 +46,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    ../icon/before.png \
-    ../icon/copy.png \
-    ../icon/cut.png \
-    ../icon/file.png \
-    ../icon/font.png \
-    ../icon/new.png \
-    ../icon/next.png \
-    ../icon/paste.png \
-    ../icon/replace.png \
-    ../icon/save.png \
-    ../icon/saveother.png \
-    ../icon/search.png \
-    ../icon/showLine.png \
-    ../icon/statusBar.png \
-    ../icon/toolBar.png \
-    ../icon/turnLine.png \
-    C:/Users/86135/Desktop/论文/icon/before.png \
-    C:/Users/86135/Desktop/论文/icon/copy.png \
-    C:/Users/86135/Desktop/论文/icon/cut.png \
-    C:/Users/86135/Desktop/论文/icon/file.png \
-    C:/Users/86135/Desktop/论文/icon/font.png \
-    C:/Users/86135/Desktop/论文/icon/new.png \
-    C:/Users/86135/Desktop/论文/icon/next.png \
-    C:/Users/86135/Desktop/论文/icon/paste.png \
-    C:/Users/86135/Desktop/论文/icon/replace.png \
-    C:/Users/86135/Desktop/论文/icon/save.png \
-    C:/Users/86135/Desktop/论文/icon/saveother.png \
-    C:/Users/86135/Desktop/论文/icon/search.png \
-    C:/Users/86135/Desktop/论文/icon/showLine.png \
-    C:/Users/86135/Desktop/论文/icon/statusBar.png \
-    C:/Users/86135/Desktop/论文/icon/toolBar.png \
-    C:/Users/86135/Desktop/论文/icon/turnLine.png \
     icon/before.png \
     icon/copy.png \
     icon/cut.png \
@@ -86,3 +65,10 @@ DISTFILES += \
 
 RESOURCES += \
     icon.qrc
+
+DESTDIR = $$PWD/bin #设置目标路径
+# windeployqt 打包
+# 自定义进程步骤:
+# 命令:         windeployqt
+# 参数:         %{sourceDir}\bin\%{CurrentProject:Name}.exe
+# 工作目录:      %{sourceDir}/bin
